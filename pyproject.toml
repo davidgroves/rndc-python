@@ -1,0 +1,90 @@
+[build-system]
+requires = ["hatchling>=1.25"]
+build-backend = "hatchling.build"
+
+[project]
+name = "rndc-python"
+version = "0.1.0"
+description = "Python client for ISC BIND's RNDC"
+readme = "README.md"
+requires-python = ">=3.10"
+authors = [{ name = "David Groves", email = "dave@fibrecat.org" }]
+keywords = ["dns", "bind", "rndc", "tsig"]
+dependencies = [
+  "click>=8.1.0",
+  "dnspython>=2.6.1",
+  "python-dotenv>=1.0.1",
+]
+
+[project.optional-dependencies]
+test = [
+  "pytest>=8.3.0",
+  "pytest-mock>=3.14.0",
+  "testcontainers>=4.9.0",
+]
+dev = [
+  "pre-commit>=4.0.0",
+  "ruff>=0.8.0",
+  "ty>=0.0.3",
+]
+
+[project.scripts]
+rndc-python-cli = "rndc_python.cli:main"
+
+[project.urls]
+Homepage = "https://example.com/rndc-python"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/rndc_python"]
+
+[tool.hatch.build.targets.sdist]
+include = [
+  "src/rndc_python",
+  "README.md",
+  "pyproject.toml",
+]
+
+[tool.uv]
+package = true
+
+[tool.pytest.ini_options]
+markers = [
+  "integration: marks tests as integration tests (require Docker)",
+]
+filterwarnings = [
+  "ignore::DeprecationWarning:testcontainers.core.waiting_utils",
+]
+
+[tool.ruff]
+target-version = "py310"
+line-length = 100
+src = ["src", "tests"]
+
+[tool.ruff.lint]
+select = [
+  "E",      # pycodestyle errors
+  "W",      # pycodestyle warnings
+  "F",      # Pyflakes
+  "I",      # isort
+  "B",      # flake8-bugbear
+  "C4",     # flake8-comprehensions
+  "UP",     # pyupgrade
+  "SIM",    # flake8-simplify
+]
+ignore = [
+  "E501",   # line too long (handled by formatter)
+  "SIM108", # ternary operator suggestion (less readable for long expressions)
+]
+
+[tool.ruff.format]
+quote-style = "double"
+
+[tool.ty.environment]
+python-version = "3.10"
+
+[dependency-groups]
+dev = [
+    "ty>=0.0.3",
+]
+
+
