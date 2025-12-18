@@ -17,20 +17,9 @@ import sys
 
 import click
 
-ALGORITHM_CHOICES = [
-    "md5",
-    "sha1",
-    "sha224",
-    "sha256",
-    "sha384",
-    "sha512",
-    "hmac-md5",
-    "hmac-sha1",
-    "hmac-sha224",
-    "hmac-sha256",
-    "hmac-sha384",
-    "hmac-sha512",
-]
+from .enums import TSIGAlgorithm
+
+ALGORITHM_CHOICES = [alg.value for alg in TSIGAlgorithm]
 
 
 @click.command()
