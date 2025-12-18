@@ -76,3 +76,9 @@ To run all hooks manually:
 ```bash
 uv run pre-commit run --all-files
 ```
+
+### Regenerate code coverage.
+
+```bash
+uv run pytest --cov=src --cov-report=html
+```
