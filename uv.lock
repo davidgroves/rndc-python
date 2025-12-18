@@ -554,6 +554,7 @@ test = [
 
 [package.dev-dependencies]
 dev = [
+    { name = "ruff" },
     { name = "ty" },
 ]
 
@@ -573,7 +574,10 @@ requires-dist = [
 provides-extras = ["test", "dev"]
 
 [package.metadata.requires-dev]
-dev = [{ name = "ty", specifier = ">=0.0.3" }]
+dev = [
+    { name = "ruff", specifier = ">=0.14.9" },
+    { name = "ty", specifier = ">=0.0.3" },
+]
 
 [[package]]
 name = "ruff"
