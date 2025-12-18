@@ -19,6 +19,7 @@ dependencies = [
 [project.optional-dependencies]
 test = [
   "pytest>=8.3.0",
+  "pytest-cov>=6.0.0",
   "pytest-mock>=3.14.0",
   "testcontainers>=4.9.0",
 ]
@@ -54,6 +55,19 @@ markers = [
 filterwarnings = [
   "ignore::DeprecationWarning:testcontainers.core.waiting_utils",
 ]
+addopts = "--cov=rndc_python --cov-report=term-missing"
+
+[tool.coverage.run]
+source = ["src/rndc_python"]
+branch = true
+
+[tool.coverage.report]
+exclude_lines = [
+  "pragma: no cover",
+  "if __name__ == .__main__.:",
+  "raise NotImplementedError",
+]
+show_missing = true
 
 [tool.ruff]
 target-version = "py310"

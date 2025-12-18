@@ -76,27 +76,3 @@ To run all hooks manually:
 ```bash
 uv run pre-commit run --all-files
 ```
-
-### Linting with ruff
-
-```bash
-uv run ruff check src/ tests/
-```
-
-To auto-fix issues:
-
-```bash
-uv run ruff check src/ tests/ --fix
-```
-
-### Type checking with ty
-
-```bash
-uv run ty check src/
-```
-
-### Format code with ruff
-
-```bash
-uv run ruff format src/ tests/
-```
