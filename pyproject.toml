@@ -7,9 +7,25 @@ name = "rndc-python"
 version = "0.1.0"
 description = "Python client for ISC BIND's RNDC"
 readme = "README.md"
+license = "MIT"
 requires-python = ">=3.10"
 authors = [{ name = "David Groves", email = "dave@fibrecat.org" }]
-keywords = ["dns", "bind", "rndc", "tsig"]
+keywords = ["dns", "bind", "rndc", "tsig", "named"]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Intended Audience :: Developers",
+  "Intended Audience :: System Administrators",
+  "License :: OSI Approved :: MIT License",
+  "Operating System :: OS Independent",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Topic :: Internet :: Name Service (DNS)",
+  "Topic :: System :: Systems Administration",
+  "Typing :: Typed",
+]
 dependencies = [
   "click>=8.1.0",
   "dnspython>=2.6.1",
@@ -34,6 +50,8 @@ rndc-python-cli = "rndc_python.cli:main"
 
 [project.urls]
 Homepage = "https://github.com/davidgroves/rndc-python"
+Repository = "https://github.com/davidgroves/rndc-python"
+Issues = "https://github.com/davidgroves/rndc-python/issues"
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/rndc_python"]
@@ -42,6 +60,7 @@ packages = ["src/rndc_python"]
 include = [
   "src/rndc_python",
   "README.md",
+  "LICENSE",
   "pyproject.toml",
 ]
 
