@@ -18,37 +18,51 @@ import sys
 import click
 
 ALGORITHM_CHOICES = [
-    "md5", "sha1", "sha224", "sha256", "sha384", "sha512",
-    "hmac-md5", "hmac-sha1", "hmac-sha224", "hmac-sha256",
-    "hmac-sha384", "hmac-sha512",
+    "md5",
+    "sha1",
+    "sha224",
+    "sha256",
+    "sha384",
+    "sha512",
+    "hmac-md5",
+    "hmac-sha1",
+    "hmac-sha224",
+    "hmac-sha256",
+    "hmac-sha384",
+    "hmac-sha512",
 ]
 
 
 @click.command()
 @click.option(
-    "-s", "--host",
+    "-s",
+    "--host",
     envvar="ZPAPI_RNDC_HOST",
     help="RNDC server hostname or IP",
 )
 @click.option(
-    "-p", "--port",
+    "-p",
+    "--port",
     type=int,
     envvar="ZPAPI_RNDC_PORT",
     help="RNDC server port",
 )
 @click.option(
-    "-a", "--algorithm",
+    "-a",
+    "--algorithm",
     type=click.Choice(ALGORITHM_CHOICES, case_sensitive=False),
     envvar="ZPAPI_RNDC_ALGORITHM",
     help="TSIG algorithm",
 )
 @click.option(
-    "-k", "--secret",
+    "-k",
+    "--secret",
     envvar="ZPAPI_RNDC_SECRET",
     help="Base64-encoded RNDC secret key",
 )
 @click.option(
-    "-t", "--timeout",
+    "-t",
+    "--timeout",
     type=int,
     envvar="ZPAPI_RNDC_TIMEOUT",
     default=10,
@@ -77,7 +91,9 @@ def main(
     if not port:
         raise click.ClickException("Missing --port or ZPAPI_RNDC_PORT environment variable")
     if not algorithm:
-        raise click.ClickException("Missing --algorithm or ZPAPI_RNDC_ALGORITHM environment variable")
+        raise click.ClickException(
+            "Missing --algorithm or ZPAPI_RNDC_ALGORITHM environment variable"
+        )
     if not secret:
         raise click.ClickException("Missing --secret or ZPAPI_RNDC_SECRET environment variable")
 

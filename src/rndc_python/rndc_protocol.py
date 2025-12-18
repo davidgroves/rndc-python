@@ -92,9 +92,7 @@ def create_hmac(secret: bytes, data: bytes, algorithm: TSIGAlgorithm) -> bytes:
     return hmac.new(secret, data, hash_algorithm).digest()
 
 
-def verify_hmac(
-    secret: bytes, data: bytes, algorithm: TSIGAlgorithm, remote_hash: bytes
-) -> bool:
+def verify_hmac(secret: bytes, data: bytes, algorithm: TSIGAlgorithm, remote_hash: bytes) -> bool:
     """Verify HMAC for message authentication."""
     expected_hash = create_hmac(secret, data, algorithm)
     return hmac.compare_digest(expected_hash, remote_hash)

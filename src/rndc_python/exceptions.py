@@ -33,4 +33,3 @@ class RNDCZoneAlreadyExistsError(RNDCError):
     """Raised when a zone already exists."""
 
     pass
-

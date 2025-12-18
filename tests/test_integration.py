@@ -217,4 +217,3 @@ class TestRNDCAuthenticationIntegration:
             )
             client.call("status")
             client.close()
-

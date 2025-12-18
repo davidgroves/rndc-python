@@ -37,4 +37,3 @@ def test_hmac_create_and_verify():
 
     tampered = base64.b64decode(base64.b64encode(digest)[:-2] + b"AA")
     assert not rndc_protocol.verify_hmac(secret, data, TSIGAlgorithm.SHA256, tampered)
-

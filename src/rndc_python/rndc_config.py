@@ -54,15 +54,9 @@ class RNDCConfig:
             _get_required_env_var("ZPAPI_RNDC_ALGORITHM")
         )
         self.secret = secret or _get_required_env_var("ZPAPI_RNDC_SECRET")
-        self.timeout = timeout or _parse_timeout(
-            _get_required_env_var("ZPAPI_RNDC_TIMEOUT")
-        )
-        self.max_retries = max_retries or _parse_int_env_var(
-            "ZPAPI_RNDC_MAX_RETRIES", 3
-        )
-        self.retry_delay = retry_delay or _parse_float_env_var(
-            "ZPAPI_RNDC_RETRY_DELAY", 1.0
-        )
+        self.timeout = timeout or _parse_timeout(_get_required_env_var("ZPAPI_RNDC_TIMEOUT"))
+        self.max_retries = max_retries or _parse_int_env_var("ZPAPI_RNDC_MAX_RETRIES", 3)
+        self.retry_delay = retry_delay or _parse_float_env_var("ZPAPI_RNDC_RETRY_DELAY", 1.0)
 
     def to_dict(self) -> dict[str, Any]:
         return {

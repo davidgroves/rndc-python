@@ -118,4 +118,3 @@ def test_call_decodes_bytes(monkeypatch, env_vars, disable_env_file):
 
     assert result["result"] == "ok"
     assert len(fake_socket.sent) == 2  # handshake + command
-

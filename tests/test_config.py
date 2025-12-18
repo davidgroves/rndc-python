@@ -55,4 +55,3 @@ def test_parse_port_invalid(port):
 def test_parse_timeout_invalid(timeout):
     with pytest.raises(ValueError):
         cfg._parse_timeout(timeout)
-

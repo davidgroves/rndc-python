@@ -47,4 +47,3 @@ def reload_rndc_client(env_vars):
 def disable_env_file(monkeypatch):
     """Prevent loading a local .env during tests."""
     monkeypatch.setattr("rndc_python.config.os.path.exists", lambda path: False)
-

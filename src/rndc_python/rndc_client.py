@@ -120,9 +120,7 @@ class RNDCClient:
             self._nonce = response["_ctrl"]["_nonce"]
 
         except OSError as e:
-            raise RNDCConnectionError(
-                f"Failed to connect to {self.host}:{self.port}: {e}"
-            ) from e
+            raise RNDCConnectionError(f"Failed to connect to {self.host}:{self.port}: {e}") from e
 
     def _ensure_connected(self) -> None:
         """Ensure we have a valid connection, reconnecting if necessary."""
@@ -205,9 +203,7 @@ class RNDCClient:
 
         # Verify hash
         my_msg = rndc_protocol.serialize_dict(message, ignore_auth=True)
-        return rndc_protocol.verify_hmac(
-            self.secret, my_msg, self.algorithm, remote_hash
-        )
+        return rndc_protocol.verify_hmac(self.secret, my_msg, self.algorithm, remote_hash)
 
     def _command(self, **kwargs: typing.Any) -> dict:
         """Send command to RNDC server and receive response."""
@@ -276,9 +272,7 @@ class RNDCClient:
         """Context manager entry."""
         return self
 
-    def __exit__(
-        self, exc_type: typing.Any, exc_val: typing.Any, exc_tb: typing.Any
-    ) -> None:
+    def __exit__(self, exc_type: typing.Any, exc_val: typing.Any, exc_tb: typing.Any) -> None:
         """Context manager exit."""
         self.close()
 
