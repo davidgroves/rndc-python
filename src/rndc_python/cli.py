@@ -19,7 +19,10 @@ import click
 
 from .enums import TSIGAlgorithm
 
-ALGORITHM_CHOICES = [alg.value for alg in TSIGAlgorithm]
+# Use lowercase enum names for CLI choices
+ALGORITHM_CHOICES = [alg.name.lower() for alg in TSIGAlgorithm]
+# Also accept hmac- prefixed versions for compatibility
+ALGORITHM_CHOICES += [f"hmac-{alg.name.lower()}" for alg in TSIGAlgorithm]
 
 
 @click.command()
