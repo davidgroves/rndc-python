@@ -31,6 +31,23 @@ class TestCLIHelp:
         assert "TSIG algorithm" in result.output
         assert "COMMAND" in result.output
 
+    def test_version_displays(self, runner):
+        """Test that --version exits successfully and prints program version."""
+        import rndc_python
+
+        result = runner.invoke(main, ["--version"])
+        assert result.exit_code == 0
+        assert "rndc-python-cli" in result.output
+        assert rndc_python.__version__ in result.output
+
+    def test_short_version_flag(self, runner):
+        """Test that -V is an alias for --version."""
+        import rndc_python
+
+        result = runner.invoke(main, ["-V"])
+        assert result.exit_code == 0
+        assert rndc_python.__version__ in result.output
+
 
 class TestCLIMissingOptions:
     """Tests for CLI with missing required options."""

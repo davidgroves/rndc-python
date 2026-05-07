@@ -20,6 +20,14 @@ uv build
 
 The built artifacts will be in the `dist/` directory.
 
+### Versioning (git tags)
+
+Package and sdist/wheel **version metadata** is derived from **git** via [hatch-vcs](https://github.com/ofek/hatch-vcs): builds use the latest reachable annotated/lightweight tag and commit distance (PEP 440), e.g. `v0.2.0` or a development suffix when not exactly on a tag.
+
+- **Release tags:** Use a consistent form such as `v0.2.0` (leading `v` is conventional for hatch-vcs/setuptools-scm-style tooling).
+- **Runtime:** `rndc_python.__version__` comes from `importlib.metadata.version("rndc-python")` (installed metadata), with a fallback if the distribution is missing (e.g. an unpacked source tree without install).
+- **CI:** Jobs that build wheels or publish to PyPI must check out **full git history and tags** so the version can be computed—for example GitHub Actions `fetch-depth: 0` and fetching tags if needed. Shallow clones often produce wrong or unusable versions.
+
 ## Testing
 
 ### Install test dependencies

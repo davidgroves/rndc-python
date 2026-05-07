@@ -1,10 +1,10 @@
 [build-system]
-requires = ["hatchling>=1.25"]
+requires = ["hatchling>=1.25", "hatch-vcs>=0.4.0"]
 build-backend = "hatchling.build"
 
 [project]
 name = "rndc-python"
-version = "0.1.1"
+dynamic = ["version"]
 description = "Python client for ISC BIND's RNDC"
 readme = "README.md"
 license = "MIT"
@@ -53,6 +53,9 @@ rndc-python-cli = "rndc_python.cli:main"
 Homepage = "https://github.com/davidgroves/rndc-python"
 Repository = "https://github.com/davidgroves/rndc-python"
 Issues = "https://github.com/davidgroves/rndc-python/issues"
+
+[tool.hatch.version]
+source = "vcs"
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/rndc_python"]

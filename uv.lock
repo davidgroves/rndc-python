@@ -531,7 +531,6 @@ wheels = [
 
 [[package]]
 name = "rndc-python"
-version = "0.1.1"
 source = { editable = "." }
 dependencies = [
     { name = "click" },
@@ -571,7 +570,7 @@ requires-dist = [
     { name = "testcontainers", marker = "extra == 'test'", specifier = ">=4.9.0" },
     { name = "ty", marker = "extra == 'dev'", specifier = ">=0.0.3" },
 ]
-provides-extras = ["test", "dev"]
+provides-extras = ["dev", "test"]
 
 [package.metadata.requires-dev]
 dev = [

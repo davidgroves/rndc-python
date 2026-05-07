@@ -4,7 +4,13 @@ rndc-python - A Python client library for ISC BIND's RNDC
 This library provides a Python interface to ISC BIND's Remote Name Daemon Control (RNDC).
 """
 
-__version__ = "0.1.1"
+from importlib.metadata import version
+
+try:
+    __version__ = version("rndc-python")
+except Exception:  # noqa: BLE001 — zpapi-style fallback when package metadata is unavailable
+    __version__ = "0.0.0+unknown"
+
 __author__ = "David Groves"
 __email__ = "dave@fibrecat.org"
 

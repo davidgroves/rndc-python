@@ -5,6 +5,7 @@ Usage:
     rndc-python-cli [options] <command>
 
 Examples:
+    rndc-python-cli --version
     rndc-python-cli status
     rndc-python-cli reload
     rndc-python-cli zonestatus example.com
@@ -17,6 +18,7 @@ import sys
 
 import click
 
+from . import __version__
 from .config import ENV_ALGORITHM, ENV_HOST, ENV_PORT, ENV_SECRET, ENV_TIMEOUT
 from .enums import TSIGAlgorithm
 
@@ -27,6 +29,7 @@ ALGORITHM_CHOICES += [f"hmac-{alg.name.lower()}" for alg in TSIGAlgorithm]
 
 
 @click.command()
+@click.version_option(__version__, "-V", "--version", prog_name="rndc-python-cli")
 @click.option(
     "-s",
     "--host",
