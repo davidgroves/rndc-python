@@ -66,7 +66,7 @@ def test_prepare_message_contains_auth(monkeypatch, env_vars, disable_env_file):
         host="127.0.0.1",
         port=953,
         algorithm=TSIGAlgorithm.SHA256,
-        secret=env_vars["ZPAPI_RNDC_SECRET"],
+        secret=env_vars["RNDC_SECRET"],
         timeout=5,
         max_retries=1,
         retry_delay=0.1,
@@ -87,7 +87,7 @@ def test_call_decodes_bytes(monkeypatch, env_vars, disable_env_file):
     import rndc_python.rndc_client as rndc_client
 
     importlib.reload(rndc_client)
-    secret = base64.b64decode(env_vars["ZPAPI_RNDC_SECRET"])
+    secret = base64.b64decode(env_vars["RNDC_SECRET"])
     handshake = build_response(
         secret=secret, algorithm=TSIGAlgorithm.SHA256, data={"result": "ok"}, nonce="abc"
     )
@@ -108,7 +108,7 @@ def test_call_decodes_bytes(monkeypatch, env_vars, disable_env_file):
         host="127.0.0.1",
         port=953,
         algorithm=TSIGAlgorithm.SHA256,
-        secret=env_vars["ZPAPI_RNDC_SECRET"],
+        secret=env_vars["RNDC_SECRET"],
         timeout=5,
         max_retries=1,
         retry_delay=0.1,

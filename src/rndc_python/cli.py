@@ -17,6 +17,7 @@ import sys
 
 import click
 
+from .config import ENV_ALGORITHM, ENV_HOST, ENV_PORT, ENV_SECRET, ENV_TIMEOUT
 from .enums import TSIGAlgorithm
 
 # Use lowercase enum names for CLI choices
@@ -29,34 +30,34 @@ ALGORITHM_CHOICES += [f"hmac-{alg.name.lower()}" for alg in TSIGAlgorithm]
 @click.option(
     "-s",
     "--host",
-    envvar="ZPAPI_RNDC_HOST",
+    envvar=ENV_HOST,
     help="RNDC server hostname or IP",
 )
 @click.option(
     "-p",
     "--port",
     type=int,
-    envvar="ZPAPI_RNDC_PORT",
+    envvar=ENV_PORT,
     help="RNDC server port",
 )
 @click.option(
     "-a",
     "--algorithm",
     type=click.Choice(ALGORITHM_CHOICES, case_sensitive=False),
-    envvar="ZPAPI_RNDC_ALGORITHM",
+    envvar=ENV_ALGORITHM,
     help="TSIG algorithm",
 )
 @click.option(
     "-k",
     "--secret",
-    envvar="ZPAPI_RNDC_SECRET",
+    envvar=ENV_SECRET,
     help="Base64-encoded RNDC secret key",
 )
 @click.option(
     "-t",
     "--timeout",
     type=int,
-    envvar="ZPAPI_RNDC_TIMEOUT",
+    envvar=ENV_TIMEOUT,
     default=10,
     help="Connection timeout in seconds",
 )
@@ -79,15 +80,13 @@ def main(
 
     # Validate required options
     if not host:
-        raise click.ClickException("Missing --host or ZPAPI_RNDC_HOST environment variable")
+        raise click.ClickException(f"Missing --host or {ENV_HOST} environment variable")
     if not port:
-        raise click.ClickException("Missing --port or ZPAPI_RNDC_PORT environment variable")
+        raise click.ClickException(f"Missing --port or {ENV_PORT} environment variable")
     if not algorithm:
-        raise click.ClickException(
-            "Missing --algorithm or ZPAPI_RNDC_ALGORITHM environment variable"
-        )
+        raise click.ClickException(f"Missing --algorithm or {ENV_ALGORITHM} environment variable")
     if not secret:
-        raise click.ClickException("Missing --secret or ZPAPI_RNDC_SECRET environment variable")
+        raise click.ClickException(f"Missing --secret or {ENV_SECRET} environment variable")
 
     # Build client kwargs
     client_kwargs: dict = {
@@ -126,7 +125,7 @@ def main(
         raise click.ClickException(f"Configuration error: {e}") from None
     except ConnectionError as e:
         raise click.ClickException(f"Connection error: {e}") from None
-    except Exception as e:
+    except Exception as e:  # noqa: BLE001 — surface unexpected errors as CLI failures after specific handlers
         raise click.ClickException(str(e)) from None
 
 

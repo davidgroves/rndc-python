@@ -10,23 +10,23 @@ def test_rndc_config_loads_env(env_vars, disable_env_file):
     reloaded = reload(rndc_config)
     conf = reloaded.RNDCConfig()
 
-    assert conf.host == env_vars["ZPAPI_RNDC_HOST"]
-    assert conf.port == int(env_vars["ZPAPI_RNDC_PORT"])
+    assert conf.host == env_vars["RNDC_HOST"]
+    assert conf.port == int(env_vars["RNDC_PORT"])
     assert conf.algorithm.name == "SHA256"
-    assert conf.secret == env_vars["ZPAPI_RNDC_SECRET"]
-    assert conf.timeout == int(env_vars["ZPAPI_RNDC_TIMEOUT"])
-    assert conf.max_retries == int(env_vars["ZPAPI_RNDC_MAX_RETRIES"])
-    assert conf.retry_delay == float(env_vars["ZPAPI_RNDC_RETRY_DELAY"])
+    assert conf.secret == env_vars["RNDC_SECRET"]
+    assert conf.timeout == int(env_vars["RNDC_TIMEOUT"])
+    assert conf.max_retries == int(env_vars["RNDC_MAX_RETRIES"])
+    assert conf.retry_delay == float(env_vars["RNDC_RETRY_DELAY"])
 
 
 def test_rndc_config_missing_env_raises(monkeypatch, disable_env_file):
     rndc_config_module = import_module("rndc_python.rndc_config")
     for key in [
-        "ZPAPI_RNDC_HOST",
-        "ZPAPI_RNDC_PORT",
-        "ZPAPI_RNDC_ALGORITHM",
-        "ZPAPI_RNDC_SECRET",
-        "ZPAPI_RNDC_TIMEOUT",
+        "RNDC_HOST",
+        "RNDC_PORT",
+        "RNDC_ALGORITHM",
+        "RNDC_SECRET",
+        "RNDC_TIMEOUT",
     ]:
         monkeypatch.delenv(key, raising=False)
 

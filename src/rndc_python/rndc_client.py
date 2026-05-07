@@ -17,6 +17,7 @@ import dns
 import dns.rdataclass
 
 from . import rndc_protocol
+from .config import ENV_ALGORITHM, ENV_HOST, ENV_PORT, ENV_SECRET
 from .enums import TSIGAlgorithm
 from .exceptions import (
     RNDCAuthenticationError,
@@ -54,28 +55,28 @@ class RNDCClient:
         elif rndc_config is not None:
             self.host = rndc_config.host
         else:
-            raise ValueError("host is required (provide it or set ZPAPI_RNDC_HOST)")
+            raise ValueError(f"host is required (provide it or set {ENV_HOST})")
 
         if port is not None:
             self.port = port
         elif rndc_config is not None:
             self.port = rndc_config.port
         else:
-            raise ValueError("port is required (provide it or set ZPAPI_RNDC_PORT)")
+            raise ValueError(f"port is required (provide it or set {ENV_PORT})")
 
         if algorithm is not None:
             self.algorithm = algorithm
         elif rndc_config is not None:
             self.algorithm = rndc_config.algorithm
         else:
-            raise ValueError("algorithm is required (provide it or set ZPAPI_RNDC_ALGORITHM)")
+            raise ValueError(f"algorithm is required (provide it or set {ENV_ALGORITHM})")
 
         if secret is not None:
             self.secret = base64.b64decode(secret)
         elif rndc_config is not None:
             self.secret = base64.b64decode(rndc_config.secret)
         else:
-            raise ValueError("secret is required (provide it or set ZPAPI_RNDC_SECRET)")
+            raise ValueError(f"secret is required (provide it or set {ENV_SECRET})")
 
         if timeout is not None:
             self.timeout = timeout
@@ -198,7 +199,7 @@ class RNDCClient:
 
         try:
             remote_hash = base64.b64decode(b64_hash)
-        except Exception:
+        except Exception:  # noqa: BLE001 — malformed TSIG hash must fail verification, not raise
             return False
 
         # Verify hash

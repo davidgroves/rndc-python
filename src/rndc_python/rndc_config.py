@@ -8,6 +8,13 @@ Assumes .env file contains all required defaults if they aren't set in the envir
 from typing import Any
 
 from .config import (
+    ENV_ALGORITHM,
+    ENV_HOST,
+    ENV_MAX_RETRIES,
+    ENV_PORT,
+    ENV_RETRY_DELAY,
+    ENV_SECRET,
+    ENV_TIMEOUT,
     _get_required_env_var,
     _load_env_file,
     _parse_float_env_var,
@@ -48,15 +55,13 @@ class RNDCConfig:
         retry_delay: float | None = None,
     ) -> None:
         _load_env_file()
-        self.host = host or _get_required_env_var("ZPAPI_RNDC_HOST")
-        self.port = port or _parse_port(_get_required_env_var("ZPAPI_RNDC_PORT"))
-        self.algorithm = algorithm or _parse_algorithm(
-            _get_required_env_var("ZPAPI_RNDC_ALGORITHM")
-        )
-        self.secret = secret or _get_required_env_var("ZPAPI_RNDC_SECRET")
-        self.timeout = timeout or _parse_timeout(_get_required_env_var("ZPAPI_RNDC_TIMEOUT"))
-        self.max_retries = max_retries or _parse_int_env_var("ZPAPI_RNDC_MAX_RETRIES", 3)
-        self.retry_delay = retry_delay or _parse_float_env_var("ZPAPI_RNDC_RETRY_DELAY", 1.0)
+        self.host = host or _get_required_env_var(ENV_HOST)
+        self.port = port or _parse_port(_get_required_env_var(ENV_PORT))
+        self.algorithm = algorithm or _parse_algorithm(_get_required_env_var(ENV_ALGORITHM))
+        self.secret = secret or _get_required_env_var(ENV_SECRET)
+        self.timeout = timeout or _parse_timeout(_get_required_env_var(ENV_TIMEOUT))
+        self.max_retries = max_retries or _parse_int_env_var(ENV_MAX_RETRIES, 3)
+        self.retry_delay = retry_delay or _parse_float_env_var(ENV_RETRY_DELAY, 1.0)
 
     def to_dict(self) -> dict[str, Any]:
         return {

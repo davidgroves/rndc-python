@@ -5,13 +5,13 @@ import os
 import pytest
 
 DEFAULT_ENV = {
-    "ZPAPI_RNDC_HOST": "127.0.0.1",
-    "ZPAPI_RNDC_PORT": "953",
-    "ZPAPI_RNDC_ALGORITHM": "hmac-sha256",
-    "ZPAPI_RNDC_SECRET": base64.b64encode(b"test-secret").decode(),
-    "ZPAPI_RNDC_TIMEOUT": "5",
-    "ZPAPI_RNDC_MAX_RETRIES": "2",
-    "ZPAPI_RNDC_RETRY_DELAY": "0.1",
+    "RNDC_HOST": "127.0.0.1",
+    "RNDC_PORT": "953",
+    "RNDC_ALGORITHM": "hmac-sha256",
+    "RNDC_SECRET": base64.b64encode(b"test-secret").decode(),
+    "RNDC_TIMEOUT": "5",
+    "RNDC_MAX_RETRIES": "2",
+    "RNDC_RETRY_DELAY": "0.1",
 }
 
 # Ensure base env is present before tests import the package

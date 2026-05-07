@@ -9,6 +9,14 @@ import os
 
 from dotenv import load_dotenv
 
+ENV_HOST = "RNDC_HOST"
+ENV_PORT = "RNDC_PORT"
+ENV_ALGORITHM = "RNDC_ALGORITHM"
+ENV_SECRET = "RNDC_SECRET"
+ENV_TIMEOUT = "RNDC_TIMEOUT"
+ENV_MAX_RETRIES = "RNDC_MAX_RETRIES"
+ENV_RETRY_DELAY = "RNDC_RETRY_DELAY"
+
 
 def _load_env_file() -> None:
     """Load environment variables from .env file if it exists."""

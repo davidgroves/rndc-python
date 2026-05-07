@@ -11,11 +11,11 @@ def runner():
     """Create a CLI test runner with isolated environment."""
     return CliRunner(
         env={
-            "ZPAPI_RNDC_HOST": None,
-            "ZPAPI_RNDC_PORT": None,
-            "ZPAPI_RNDC_ALGORITHM": None,
-            "ZPAPI_RNDC_SECRET": None,
-            "ZPAPI_RNDC_TIMEOUT": None,
+            "RNDC_HOST": None,
+            "RNDC_PORT": None,
+            "RNDC_ALGORITHM": None,
+            "RNDC_SECRET": None,
+            "RNDC_TIMEOUT": None,
         }
     )
 
@@ -126,10 +126,10 @@ class TestCLIEnvironmentVariables:
             main,
             ["status"],
             env={
-                "ZPAPI_RNDC_HOST": "testhost",
-                "ZPAPI_RNDC_PORT": "953",
-                "ZPAPI_RNDC_ALGORITHM": "sha256",
-                "ZPAPI_RNDC_SECRET": "dGVzdHNlY3JldA==",
+                "RNDC_HOST": "testhost",
+                "RNDC_PORT": "953",
+                "RNDC_ALGORITHM": "sha256",
+                "RNDC_SECRET": "dGVzdHNlY3JldA==",
             },
         )
 
@@ -151,10 +151,10 @@ class TestCLIEnvironmentVariables:
             main,
             ["--host", "clihost", "--port", "9953", "status"],
             env={
-                "ZPAPI_RNDC_HOST": "envhost",
-                "ZPAPI_RNDC_PORT": "953",
-                "ZPAPI_RNDC_ALGORITHM": "sha256",
-                "ZPAPI_RNDC_SECRET": "dGVzdHNlY3JldA==",
+                "RNDC_HOST": "envhost",
+                "RNDC_PORT": "953",
+                "RNDC_ALGORITHM": "sha256",
+                "RNDC_SECRET": "dGVzdHNlY3JldA==",
             },
         )
 

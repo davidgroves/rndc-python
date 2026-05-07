@@ -27,10 +27,10 @@ The package includes a CLI tool `rndc-python-cli`:
 rndc-python-cli -s 127.0.0.1 -p 953 -a sha256 -k <base64-secret> status
 
 # Using environment variables
-export ZPAPI_RNDC_HOST=127.0.0.1
-export ZPAPI_RNDC_PORT=953
-export ZPAPI_RNDC_ALGORITHM=sha256
-export ZPAPI_RNDC_SECRET=<base64-secret>
+export RNDC_HOST=127.0.0.1
+export RNDC_PORT=953
+export RNDC_ALGORITHM=sha256
+export RNDC_SECRET=<base64-secret>
 rndc-python-cli status
 
 # Mix of both (CLI options override env vars)
@@ -41,13 +41,13 @@ rndc-python-cli --port 954 reload
 
 The client can read its settings from environment variables (or a `.env` file):
 
-- `ZPAPI_RNDC_HOST`
-- `ZPAPI_RNDC_PORT`
-- `ZPAPI_RNDC_ALGORITHM` (e.g. `hmac-sha256`)
-- `ZPAPI_RNDC_SECRET`
-- `ZPAPI_RNDC_TIMEOUT`
-- `ZPAPI_RNDC_MAX_RETRIES`
-- `ZPAPI_RNDC_RETRY_DELAY`
+- `RNDC_HOST`
+- `RNDC_PORT`
+- `RNDC_ALGORITHM` (e.g. `hmac-sha256`)
+- `RNDC_SECRET`
+- `RNDC_TIMEOUT`
+- `RNDC_MAX_RETRIES`
+- `RNDC_RETRY_DELAY`
 
 You can also configure the client directly in Python:
 
