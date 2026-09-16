@@ -28,6 +28,28 @@ Package and sdist/wheel **version metadata** is derived from **git** via [hatch-
 - **Runtime:** `rndc_python.__version__` comes from `importlib.metadata.version("rndc-python")` (installed metadata), with a fallback if the distribution is missing (e.g. an unpacked source tree without install).
 - **CI:** Jobs that build wheels or publish to PyPI must check out **full git history and tags** so the version can be computed—for example GitHub Actions `fetch-depth: 0` and fetching tags if needed. Shallow clones often produce wrong or unusable versions.
 
+## Releasing
+
+Pushing a tag matching `v*` runs [`.github/workflows/publish.yml`](.github/workflows/publish.yml): unit tests, `uv build`, then upload to PyPI via [Trusted Publishing](https://docs.pypi.org/trusted-publishers/) (OIDC). No `PYPI_API_TOKEN` is stored in the repo.
+
+### One-time setup
+
+1. Create a GitHub Environment named **`pypi`** on this repository (Settings → Environments), or allow the first tagged workflow run to create it when referenced.
+2. On [PyPI → rndc-python → Publishing](https://pypi.org/manage/project/rndc-python/settings/publishing/), add a Trusted Publisher:
+   - Owner: `davidgroves`
+   - Repository: `rndc-python`
+   - Workflow name: `publish.yml`
+   - Environment name: `pypi`
+
+### Publish a release
+
+```bash
+git tag vX.Y.Z
+git push origin vX.Y.Z
+```
+
+Use a version that has not already been published on PyPI. The wheel/sdist version is taken from the tag by hatch-vcs.
+
 ## Testing
 
 ### Install test dependencies
