@@ -1,0 +1,49 @@
+{
+  $schema: "https://docs.renovatebot.com/renovate-schema.json",
+
+  automerge: false,
+
+  extends: [
+    "config:recommended",
+    ":dependencyDashboard",
+    "group:allNonMajor",
+  ],
+
+  lockFileMaintenance: {
+    enabled: true,
+    schedule: ["before 6am on monday"],
+  },
+
+  // Detect BIND image tags embedded in Python integration tests.
+  customManagers: [
+    {
+      customType: "regex",
+      fileMatch: ["^tests/.*\\.py$"],
+      matchStrings: [
+        "image=[\"'](?<depName>internetsystemsconsortium/bind9):(?<currentValue>[^\"']+)[\"']",
+      ],
+      datasourceTemplate: "docker",
+    },
+  ],
+
+  packageRules: [
+    {
+      matchUpdateTypes: ["major"],
+      groupName: null,
+    },
+    {
+      matchManagers: ["pre-commit"],
+      groupName: "pre-commit hooks",
+    },
+    {
+      // ISC BIND uses even minors for stable (9.18, 9.20) and odd minors for
+      // the development/unstable branch (9.19, 9.21). Renovate sees 9.21 > 9.20
+      // numerically and would otherwise bump us onto the unstable branch.
+      // Keep us on the 9.20 stable branch until the next stable (9.22) is
+      // adopted intentionally.
+      matchDatasources: ["docker"],
+      matchPackageNames: ["internetsystemsconsortium/bind9"],
+      allowedVersions: "<9.21",
+    },
+  ],
+}
